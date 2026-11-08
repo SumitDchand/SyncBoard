@@ -11,11 +11,15 @@ build/
 
 # Environment & Credentials
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+*.env
+**/.env
+**/.env.*
+!**/.env.example
 *.pem
+*.key
+*.cert
 
 # Logs & Debug
 logs
