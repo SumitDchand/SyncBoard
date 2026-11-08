@@ -17,3 +17,4 @@
 - [ ] I have executed `npm run test:e2e` and Playwright tests pass
 - [ ] Real-time propagation latency has been verified with `npm run benchmark`
 - [ ] My changes generate no new TypeScript build warnings or lint errors
+
