@@ -13,9 +13,10 @@ export const initSocket = (): Socket => {
   }
 
   const token = getAccessToken();
+  const socketUrl = (import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || '/') as string;
 
-  // In development/production Vite proxies or direct connect
-  socket = io('/', {
+  // In development/production connects to VITE_SOCKET_URL or proxies via Vite
+  socket = io(socketUrl, {
     auth: { token },
     transports: ['websocket', 'polling'],
     autoConnect: true,

@@ -45,7 +45,8 @@ export const apiFetch = async <T = any>(
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const url = endpoint.startsWith('http') ? endpoint : `/api${endpoint}`;
+  const baseUrl = import.meta.env.VITE_API_URL ? (import.meta.env.VITE_API_URL as string).replace(/\/$/, '') : '';
+  const url = endpoint.startsWith('http') ? endpoint : `${baseUrl}/api${endpoint}`;
 
   const response = await fetch(url, {
     ...options,
@@ -58,7 +59,7 @@ export const apiFetch = async <T = any>(
     if (!isRefreshing) {
       isRefreshing = true;
       try {
-        const refreshResponse = await fetch('/api/auth/refresh', {
+        const refreshResponse = await fetch(`${baseUrl}/api/auth/refresh`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
