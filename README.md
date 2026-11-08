@@ -150,51 +150,71 @@ Interactive API Documentation is served at: **`http://localhost:5001/api-docs`**
 
 ---
 
-## 6. Quick Start & Local Setup
+## 6. How to Run SyncBoard (Quick Start)
+
+> **Note:** You do **not** need Docker to run SyncBoard locally. Everything is configured to run natively with Node.js and the built-in local MongoDB engine.
 
 ### Prerequisites
 - Node.js v20+ or v22+
 - npm v10+
-- MongoDB v7+ (Or use the built-in automatic fallback engine)
 
-### Step 1: Clone & Install Dependencies
+### Option A: The Fastest Way (1 Command!)
+
+Run both the Backend (port 5001) and Frontend (port 5173) concurrently with one command:
 ```bash
-git clone https://github.com/your-org/syncboard.git
-cd syncboard
+npm run dev
+```
 
-# Install root, backend, and frontend dependencies
+Then open **[http://localhost:5173](http://localhost:5173)** in your browser!
+
+---
+
+### Option B: Step-by-Step Complete Setup
+
+#### Step 1: Install Dependencies
+```bash
+# In the project root:
 npm install
 cd backend && npm install
 cd ../frontend && npm install
 cd ..
 ```
 
-### Step 2: Configure Environment Variables
-```bash
-cp .env.example .env
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
-```
-
-### Step 3: Seed Realistic Demo Data
+#### Step 2: Seed Demo Data (Optional but Recommended)
+Populate realistic users, sprint boards, and tasks:
 ```bash
 npm run seed
 ```
-This populates 3 test users, 2 boards, and realistic sprint tasks:
-- `alice@syncboard.dev` / `Password123!` (Owner)
-- `bob@syncboard.dev` / `Password123!` (Admin)
-- `carol@syncboard.dev` / `Password123!` (Member)
+Demo login accounts:
+- **Alice (Owner):** `alice@syncboard.dev` / `Password123!`
+- **Bob (Admin):** `bob@syncboard.dev` / `Password123!`
+- **Carol (Member):** `carol@syncboard.dev` / `Password123!`
 
-### Step 4: Start Development Servers
-Run both backend and frontend concurrently:
+#### Step 3: Start Development Servers
+You can start both together:
 ```bash
-# Terminal 1: Backend
+npm run dev
+```
+Or in separate terminal tabs if you prefer isolated logs:
+```bash
+# Terminal 1: Backend API (port 5001)
 npm run dev:backend
 
-# Terminal 2: Frontend
+# Terminal 2: Frontend UI (port 5173)
 npm run dev:frontend
 ```
-Open **`http://localhost:5173`** in your browser.
+
+#### Step 4: Open and Test Real-Time Collaboration
+1. Navigate to: 👉 **[http://localhost:5173](http://localhost:5173)**
+2. Click any of the **Quick Demo Account** buttons (*Alice*, *Bob*, or *Carol*) to sign in instantly.
+3. **To see real-time synchronization in action:** Open an **Incognito window** or a second browser alongside the first one, sign into the same board, and move or add tasks. Watch changes update **instantly across both windows without refreshing!**
+4. Check the **Latency Telemetry Badge** at the top right showing measured propagation delay (e.g. `16ms (<100ms Target Met)`).
+
+#### URLs & Endpoints
+- **Frontend Web App:** `http://localhost:5173`
+- **Backend API Server:** `http://localhost:5001/api`
+- **Backend Health Check:** `http://localhost:5001/api/health`
+- **Interactive Swagger Docs:** `http://localhost:5001/api-docs`
 
 ---
 
